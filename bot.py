@@ -23,7 +23,7 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 router=Router()
 
-
+videos=["https://youtube.com/shorts/LaZ_-qMcBBU?si=yi4VJhGDQU-nJ9Xy","https://youtube.com/shorts/zzA4VhDzAyI?si=MfMbsTzsd7nKHgGX","https://youtube.com/shorts/0AVKWrXAm6A?si=enh-oC8lj4kE5eB0","https://youtube.com/shorts/_A_4MdkqB2o?si=E2vkFq63C3eXdAGN"]
 # Хэндлер на команду /start
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
@@ -80,7 +80,16 @@ async def choose_literature_books(message:types.Message,state:FSMContext):
                          istaganingizni tanlang',reply_markup=reply_choose_video_kb)
     await state.set_state(Video.choose_video_type)
 
-@router.message(Video.choose_video_type)
+@router.message(Video.choose_video_type,F.text.lower()=="fan video-maruzalari")
+async def choose_video_type(message:types.Message,state:FSMContext):
+   
+    await state.clear()
+    await message.answer("Siz quyidagi  fan video maruza va \
+                          roliklarimizni tomosha qilishingiz mumkin",reply_markup=reply_main_kb)
+    for video in videos:
+        await message.answer(video)
+
+@router.message(Video.choose_video_type,F.text.lower()=="ilmiy-ommabop roliklar")
 async def choose_video_type(message:types.Message,state:FSMContext):
    
     await state.set_state(Video.choose_economics)
