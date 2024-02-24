@@ -27,31 +27,27 @@ videos=["https://youtube.com/shorts/LaZ_-qMcBBU?si=yi4VJhGDQU-nJ9Xy","https://yo
 # Хэндлер на команду /start
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer(text="Xush kelibsiz,\
-                          ilimsevar,o'zingizni qiziqtirgan malumotlarni olishga sizda imkon bor,hozir",reply_markup=reply_main_kb)
+    await message.answer(text="Xush kelibsiz, ilimsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
 
 
 @router.message(F.text.lower() == "🏠 asosiy")
 async def cmd_cancel(message: Message, state: FSMContext):
     await state.clear()
-    await message.answer(text="Xush kelibsiz,ilimsevar,\
-                          o'zingizni qiziqtirgan malumot olishga sizda imkon bor,\
-                          hozir",reply_markup=reply_main_kb)
+    await message.answer(text="Xush kelibsiz, ilimsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
 
 
 @router.message(F.text.lower()=="🔊 tiflo kitoblar")
 async def choose_literature_books(message:types.Message,state:FSMContext):
-    await message.answer('biz sizga turli xildagi adabiyotlar taklif qilmoqdamiz , \
-                         istaganingizni tanlang',reply_markup=reply_literature_kb)
+    await message.answer('Biz sizga turli xildagi adabiyotlarni taklif qilmoqdamiz, istaganingizni tanlang!',reply_markup=reply_literature_kb)
     await state.set_state(Tiflo.choose_literature_type)
 
 @router.message(Tiflo.choose_literature_type,F.text.lower()=="📜 badiiy adabiyotlar")
 async def choose_literature(message:types.Message,state:FSMContext):
-    await message.answer("hozirda bu qism ma'lumotlari to'ldirilmoqda")
+    await message.answer("Hozirda bu qism ma'lumotlari to'ldirilmoqda")
 @router.message(Tiflo.choose_literature_type,F.text.lower()=="📒 ilmiy ommabop adabiyotlar")
 async def choose_literature(message:types.Message,state:FSMContext):
-    link_text='Havalo'
-    message_text = f"<b>Audio Kitob:Iqtisodiyot osmonida yulduzga aylanganlar</b>\n\
+    link_text='-- Havola --'
+    message_text = f"<b>Audio Kitob: Iqtisodiyot osmonida yulduzga aylanganlar</b>\n\
 1.Kirish.<a href='https://www.youtube.com/watch?v=07lfGxMukGI&list=PLWnln1h-GrAgM-01kCqhr8cwXDVkam9XX&index=1&pp=iAQB'>{link_text}</a>\n\
 2.Vasiliy Vasilovich Leontev <a href='https://www.youtube.com/watch?v=lxIcEUXW3ec&list=PLWnln1h-GrAgM-01kCqhr8cwXDVkam9XX&index=2&pp=iAQB'>{link_text}</a>\n\
 3.Pol Entoni Samuelson  <a href='https://www.youtube.com/watch?v=57gwxnYP33Q&list=PLWnln1h-GrAgM-01kCqhr8cwXDVkam9XX&index=3&pp=iAQB'>{link_text}</a>\n\
@@ -78,16 +74,14 @@ async def choose_literature(message:types.Message,state:FSMContext):
 
 @router.message(F.text.lower()=="🖥 video darslar")
 async def choose_literature_books(message:types.Message,state:FSMContext):
-    await message.answer('biz sizga turli xildagi videolar taklif qilmoqdamiz , \
-                         istaganingizni tanlang',reply_markup=reply_choose_video_kb)
+    await message.answer('Biz sizga turli xildagi videolarni taklif qilmoqdamiz, istaganingizni tanlang!',reply_markup=reply_choose_video_kb)
     await state.set_state(Video.choose_video_type)
 
 @router.message(Video.choose_video_type,F.text.lower()=="🎥 fan video-maruzalari")
 async def choose_video_type(message:types.Message,state:FSMContext):
    
     await state.clear()
-    await message.answer("Siz quyidagi  fan video maruza va \
-                          roliklarimizni tomosha qilishingiz mumkin",reply_markup=reply_main_kb)
+    await message.answer("Siz quyidagi video maruza va roliklarimizni tomosha qilishingiz mumkin.",reply_markup=reply_main_kb)
     for video in videos:
         await message.answer(video)
 
@@ -95,19 +89,18 @@ async def choose_video_type(message:types.Message,state:FSMContext):
 async def choose_video_type(message:types.Message,state:FSMContext):
    
     await state.set_state(Video.choose_economics)
-    await message.answer("Siz quyidagi yo'nalishlardagi video \
-                          roliklarimizni tomosha qilishingiz mumkin",reply_markup=reply_choose_international_economics)
+    await message.answer("Siz quyidagi yo'nalishlardagi video roliklarimizni tomosha qilishingiz mumkin.",reply_markup=reply_choose_international_economics)
 @router.message(Video.choose_economics)
 async def choose_international_economic(message:types.Message,state:FSMContext):
 
     # content = Text("Inklusiv video darslar\n",Bold("1."), "Xalqaro xizmatlar bozori\n","Havola: ",Url("https://youtu.be/W5tqBwEB_Ok?si=4hOP13oWgn78ac84"))
     link_text = "-- Havola --"
    
-    message_text = f"<b>Inklusiv video darslar</b>\n 1.Xalqaro xizmatlar bozori.\
-          Maruzachi:<b>Qobiljon Isayev</b> <a href='https://youtu.be/W5tqBwEB_Ok?si=4hOP13oWgn78ac84'>{link_text}</a>\n 2.Xalqaro iqtisodiy munosabatlar. \
-          Maruzachi:<b>Qobiljon Isayev</b> <a href='https://youtu.be/_8YcOQW91Ug?si=O9x4ILlrqKtY4nKi'>{link_text}</a>\n 3.Oltin valyuta zaxiralari.\
-            Maruzachi:<b>Qobiljon Isayev</b> <a href='https://youtu.be/9Qintfi_w2s?si=9vSe4LmYSQcoF9q-'>{link_text}</a>\n 4.Xalqaro valyuta munosabatlari.Maruzachi:<b>Qobiljon Isayev</b>\
-              <a href='https://youtu.be/j6gsWOTzLzs?si=Mz_eejPssZTvNnOr'>{link_text}</a>"
+    message_text = f"<b>Inklusiv video darslar</b>\n 1.Xalqaro xizmatlar bozori.\n\
+          Maruzachi:<b>Qobiljon Isayev</b> <a href='https://youtu.be/W5tqBwEB_Ok?si=4hOP13oWgn78ac84'>{link_text}</a>\n 2.Xalqaro iqtisodiy munosabatlar.\n \
+          Maruzachi:<b>Qobiljon Isayev</b> <a href='https://youtu.be/_8YcOQW91Ug?si=O9x4ILlrqKtY4nKi'>{link_text}</a>\n 3.Oltin valyuta zaxiralari.\n\
+          Maruzachi:<b>Qobiljon Isayev</b> <a href='https://youtu.be/9Qintfi_w2s?si=9vSe4LmYSQcoF9q-'>{link_text}</a>\n 4.Xalqaro valyuta munosabatlari.\n \
+          Maruzachi:<b>Qobiljon Isayev</b> <a href='https://youtu.be/j6gsWOTzLzs?si=Mz_eejPssZTvNnOr'>{link_text}</a>"
 
     await message.answer( text=message_text,
         reply_markup=reply_enclusive_videos_inkb,
@@ -184,9 +177,7 @@ async def send_random_value(callback: types.CallbackQuery):
     await callback.message.answer( text="https://www.youtube.com/watch?v=DLg4qNw8Iww&list=PLWnln1h-GrAgM-01kCqhr8cwXDVkam9XX&index=20&pp=iAQB")
 @router.callback_query(F.data.lower() == "🏠 asosiy")
 async def send_random_value(callback: types.CallbackQuery):
-    await callback.message.answer(text="Xush kelibsiz,ilimsevar,\
-                          o'zingizni qiziqtirgan malumot olishga sizda imkon bor,\
-                          hozir",reply_markup=reply_main_kb)
+    await callback.message.answer(text="Xush kelibsiz, ilimsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
      
 
 @router.callback_query(F.data == "1")
@@ -204,9 +195,7 @@ async def send_random_value(callback: types.CallbackQuery):
     await callback.message.answer( text="https://youtu.be/j6gsWOTzLzs?si=Mz_eejPssZTvNnOr")
 @router.callback_query(F.data.lower() == "🏠 asosiy")
 async def send_random_value(callback: types.CallbackQuery):
-    await callback.message.answer(text="Xush kelibsiz,ilimsevar,\
-                          o'zingizni qiziqtirgan malumot olishga sizda imkon bor,\
-                          hozir",reply_markup=reply_main_kb)
+    await callback.message.answer(text="Xush kelibsiz, ilmsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
 
 @router.message(F.media)
 async def handle_group_video(message: types.Message):
