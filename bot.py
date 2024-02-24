@@ -28,11 +28,10 @@ videos=["https://youtube.com/shorts/LaZ_-qMcBBU?si=yi4VJhGDQU-nJ9Xy","https://yo
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
     await message.answer(text="Xush kelibsiz,\
-                          ilimsevar,o'zingizni qiziqtirgan malumot olishga sizda imkon bor,\
-                          hozir",reply_markup=reply_main_kb)
+                          ilimsevar,o'zingizni qiziqtirgan malumotlarni olishga sizda imkon bor,hozir",reply_markup=reply_main_kb)
 
 
-@router.message(F.text.lower() == "asosiy")
+@router.message(F.text.lower() == "🏠 asosiy")
 async def cmd_cancel(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(text="Xush kelibsiz,ilimsevar,\
@@ -40,13 +39,16 @@ async def cmd_cancel(message: Message, state: FSMContext):
                           hozir",reply_markup=reply_main_kb)
 
 
-@router.message(F.text.lower()=="tiflo kitoblar")
+@router.message(F.text.lower()=="🔊 tiflo kitoblar")
 async def choose_literature_books(message:types.Message,state:FSMContext):
     await message.answer('biz sizga turli xildagi adabiyotlar taklif qilmoqdamiz , \
                          istaganingizni tanlang',reply_markup=reply_literature_kb)
     await state.set_state(Tiflo.choose_literature_type)
 
-@router.message(Tiflo.choose_literature_type,F.text.lower()=="ilmiy ommabop adabiyotlar")
+@router.message(Tiflo.choose_literature_type,F.text.lower()=="📜 badiiy adabiyotlar")
+async def choose_literature(message:types.Message,state:FSMContext):
+    await message.answer("hozirda bu qism ma'lumotlari to'ldirilmoqda")
+@router.message(Tiflo.choose_literature_type,F.text.lower()=="📒 ilmiy ommabop adabiyotlar")
 async def choose_literature(message:types.Message,state:FSMContext):
     link_text='Havalo'
     message_text = f"<b>Audio Kitob:Iqtisodiyot osmonida yulduzga aylanganlar</b>\n\
@@ -74,13 +76,13 @@ async def choose_literature(message:types.Message,state:FSMContext):
 
     await message.answer(message_text,reply_markup=reply_scientific_inkb, parse_mode=ParseMode.HTML)
 
-@router.message(F.text.lower()=="video darslar")
+@router.message(F.text.lower()=="🖥 video darslar")
 async def choose_literature_books(message:types.Message,state:FSMContext):
     await message.answer('biz sizga turli xildagi videolar taklif qilmoqdamiz , \
                          istaganingizni tanlang',reply_markup=reply_choose_video_kb)
     await state.set_state(Video.choose_video_type)
 
-@router.message(Video.choose_video_type,F.text.lower()=="fan video-maruzalari")
+@router.message(Video.choose_video_type,F.text.lower()=="🎥 fan video-maruzalari")
 async def choose_video_type(message:types.Message,state:FSMContext):
    
     await state.clear()
@@ -89,7 +91,7 @@ async def choose_video_type(message:types.Message,state:FSMContext):
     for video in videos:
         await message.answer(video)
 
-@router.message(Video.choose_video_type,F.text.lower()=="ilmiy-ommabop roliklar")
+@router.message(Video.choose_video_type,F.text.lower()=="📽 ilmiy-ommabop roliklar")
 async def choose_video_type(message:types.Message,state:FSMContext):
    
     await state.set_state(Video.choose_economics)
@@ -180,7 +182,7 @@ async def send_random_value(callback: types.CallbackQuery):
 @router.callback_query(F.data == "20a")
 async def send_random_value(callback: types.CallbackQuery):
     await callback.message.answer( text="https://www.youtube.com/watch?v=DLg4qNw8Iww&list=PLWnln1h-GrAgM-01kCqhr8cwXDVkam9XX&index=20&pp=iAQB")
-@router.callback_query(F.data.lower() == "asosiy")
+@router.callback_query(F.data.lower() == "🏠 asosiy")
 async def send_random_value(callback: types.CallbackQuery):
     await callback.message.answer(text="Xush kelibsiz,ilimsevar,\
                           o'zingizni qiziqtirgan malumot olishga sizda imkon bor,\
@@ -200,7 +202,7 @@ async def send_random_value(callback: types.CallbackQuery):
 @router.callback_query(F.data == "4")
 async def send_random_value(callback: types.CallbackQuery):
     await callback.message.answer( text="https://youtu.be/j6gsWOTzLzs?si=Mz_eejPssZTvNnOr")
-@router.callback_query(F.data.lower() == "asosiy")
+@router.callback_query(F.data.lower() == "🏠 asosiy")
 async def send_random_value(callback: types.CallbackQuery):
     await callback.message.answer(text="Xush kelibsiz,ilimsevar,\
                           o'zingizni qiziqtirgan malumot olishga sizda imkon bor,\
