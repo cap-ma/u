@@ -27,7 +27,7 @@ videos=["https://youtube.com/shorts/LaZ_-qMcBBU?si=yi4VJhGDQU-nJ9Xy","https://yo
 # Хэндлер на команду /start
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
-    await message.answer(text="Xush kelibsiz, ilimsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
+    await message.answer(text="Xush kelibsiz, ilmsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
 
 
 
@@ -36,7 +36,7 @@ async def cmd_start(message: types.Message):
 @router.message(F.text.lower() == "🏠 asosiy")
 async def cmd_cancel(message: Message, state: FSMContext):
     await state.clear()
-    await message.answer(text="Xush kelibsiz, ilimsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
+    await message.answer(text="Xush kelibsiz, ilmsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
 
 @router.message(F.text.lower()=="🔊 tiflo kitoblar")
 async def choose_literature_books(message:types.Message,state:FSMContext):
@@ -211,7 +211,7 @@ async def send_random_value(callback: types.CallbackQuery):
     await callback.message.answer( text="https://www.youtube.com/watch?v=DLg4qNw8Iww&list=PLWnln1h-GrAgM-01kCqhr8cwXDVkam9XX&index=20&pp=iAQB")
 @router.callback_query(F.data.lower() == "🏠 asosiy")
 async def send_random_value(callback: types.CallbackQuery):
-    await callback.message.answer(text="Xush kelibsiz, ilimsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
+    await callback.message.answer(text="Xush kelibsiz, ilmsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
      
 
 @router.callback_query(F.data == "1")
