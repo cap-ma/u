@@ -3,7 +3,7 @@ from aiogram.types import KeyboardButton,ReplyKeyboardMarkup,InlineKeyboardButto
 main_kb=[
     [KeyboardButton(text='🔊 Tiflo Kitoblar'),KeyboardButton(text='🖥 Video Darslar')],
   
-    [KeyboardButton(text='🏠 Asosiy')],
+  
 
 ]
 
@@ -12,7 +12,7 @@ reply_main_kb=ReplyKeyboardMarkup(keyboard=main_kb,resize_keyboard=True)
 literature_kb=[
     [KeyboardButton(text='📜 Badiiy Adabiyotlar')],
     [KeyboardButton(text='📒 Ilmiy Ommabop Adabiyotlar')],
-        [KeyboardButton(text='🏠 Asosiy')],
+        [KeyboardButton(text='⬅️ Ortga')],
 
 ]
 
@@ -21,7 +21,7 @@ reply_literature_kb=ReplyKeyboardMarkup(keyboard=literature_kb,resize_keyboard=T
 choose_video_kb=[
     [KeyboardButton(text='🎥 Fan video-maruzalari')],
     [KeyboardButton(text='📽 Ilmiy-ommabop roliklar')],
-    [KeyboardButton(text='🏠 Asosiy')],
+    [KeyboardButton(text='⬅️ Ortga')],
 
 ]
 
@@ -30,7 +30,7 @@ reply_choose_video_kb=ReplyKeyboardMarkup(keyboard=choose_video_kb,resize_keyboa
 
 choose_international_economics_kb=[
     [KeyboardButton(text='📈 Xalqaro iqtisodiyot')],
-    [KeyboardButton(text='🏠 Asosiy')],
+    [KeyboardButton(text='⬅️ Ortga')],
 ]
 
 
