@@ -28,9 +28,6 @@ videos=["https://youtube.com/shorts/LaZ_-qMcBBU?si=yi4VJhGDQU-nJ9Xy","https://yo
 @router.message(Command("start"))
 async def cmd_start(message: types.Message):
     await message.answer(text="Xush kelibsiz, ilmsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
-
-
-
     # await message.answer(text="Xush kelibsiz, ilimsevar, o'zingizni qiziqtirgan ma'lumotlarni olishga sizda imkon bor, hozir!",reply_markup=reply_main_kb)
 
 @router.message(F.text.lower() == "🏠 asosiy")
@@ -239,10 +236,11 @@ async def handle_group_video(message: types.Message):
     print(f"Video File ID: {video_file_id}")
 
 
-
+from aiogram.client.session.aiohttp import AiohttpSession
+session=AiohttpSession(proxy="http://proxy.server:3128")
 # Запуск процесса поллинга новых апдейтов
 async def main():
-    bot = Bot(token=os.getenv("TOKEN"))
+    bot = Bot(token=os.getenv("TOKEN"),session=session)
     dp = Dispatcher()
     dp.include_router(router)
     await dp.start_polling(bot)
